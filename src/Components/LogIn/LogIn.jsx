@@ -33,7 +33,7 @@ export default function Login() {
     axios.post('https://linked-posts.routemisr.com/users/signin',data).
     then(response => {
       changeToken(response.data.token)
-      // navigate('/home')
+      navigate('/')
     }).catch(error=>{
       setApiErrorResp(error.response.data.error)
     }).finally(()=>{

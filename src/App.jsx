@@ -8,12 +8,12 @@ import SignUp from './Components/SignUp/SignUp';
 import LogIn from './Components/LogIn/LogIn';
 import Error from './Components/Error/Error';
 import UserContextProvider from './Contexts/UserContext';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 const appRouter = createBrowserRouter([
   {path:'',element:<Layout/>,children:[
-    {index:true, element:<Home/>},
-    {path:'home', element:<Home/>},
-    {path:'profile', element:<Profile/>},
+    {index:true, element:<ProtectedRoute><Home/></ProtectedRoute>},
+    {path:'profile', element:<ProtectedRoute><Profile/></ProtectedRoute>},
     {path:'login', element:<LogIn/>},
     {path:'signup', element:<SignUp/>},
     {path:'*', element:<Error/>}
