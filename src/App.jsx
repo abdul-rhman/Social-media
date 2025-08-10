@@ -7,6 +7,7 @@ import Profile from './Components/Profile/Profile';
 import SignUp from './Components/SignUp/SignUp';
 import LogIn from './Components/LogIn/LogIn';
 import Error from './Components/Error/Error';
+import UserContextProvider from './Contexts/UserContext';
 
 const appRouter = createBrowserRouter([
   {path:'',element:<Layout/>,children:[
@@ -21,6 +22,8 @@ const appRouter = createBrowserRouter([
 
 export default function App() {
   return (
-    <RouterProvider router={appRouter}/>
+    <UserContextProvider>
+      <RouterProvider router={appRouter}/>
+    </UserContextProvider>
   )
 }
