@@ -10,6 +10,7 @@ import Error from './Components/Error/Error';
 import UserContextProvider from './Contexts/UserContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import SinglePost from './Components/SinglePost/SinglePost';
 
 const reactQueyClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const appRouter = createBrowserRouter([
     {path:'profile', element:<ProtectedRoute><Profile/></ProtectedRoute>},
     {path:'login', element:<LogIn/>},
     {path:'signup', element:<SignUp/>},
+    {path:'postDetails/:id', element:<ProtectedRoute><SinglePost/></ProtectedRoute>},
     {path:'*', element:<Error/>}
   ]}
 ])

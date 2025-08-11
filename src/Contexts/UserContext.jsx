@@ -4,7 +4,6 @@ export const userContext = createContext();
 
 
 export default function UserContextProvider(prop) {
-      console.log(prop)
 
     let [token,setToken] = useState(localStorage.getItem('userToken'));
 

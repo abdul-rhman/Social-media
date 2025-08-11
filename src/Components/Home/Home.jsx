@@ -4,11 +4,12 @@ import img from '../../assets/Infographic_CH08_Browser Object Model (BOM).jpg'
 import axios from 'axios';
 import { userContext } from '../../Contexts/UserContext';
 import { useQuery } from '@tanstack/react-query';
+import Comment from './../Comment/Comment';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
 
 let {token} = useContext(userContext);
-console.log(token)
 
 let {data, error, isError, isLoading} = useQuery({
   queryKey: ['postsQuery'],
@@ -18,17 +19,8 @@ let {data, error, isError, isLoading} = useQuery({
       }
     })
 })
-// let [posts,setPosts] = useState(null)
 
-  // useEffect(()=>{
-  //   axios.get('https://linked-posts.routemisr.com/posts?limit=50',{
-  //     headers:{
-  //       token
-  //     }
-  //   }).then((response)=>{
-  //     setPosts(response.data.posts);
-  //   })
-  // },[])
+  let navigate = useNavigate();
   return (
     <>
       {isLoading?(<div className=" flex h-screen w-full justify-center items-center"><div className='lds-spinner'><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div></div>
@@ -44,8 +36,11 @@ let {data, error, isError, isLoading} = useQuery({
               <p className='text-xs text-slate-400'>{post.createdAt}</p>
             </div>
           </div>
-          <h2 className='mb-4'>{post.body}</h2>
-          <img src={post.image} className='w-full rounded-md' alt="" />
+          <div className='cursor-pointer' onClick={()=>{navigate(`/postDetails/${post._id}`)}}>
+            <h2 className='mb-4'>{post.body}</h2>
+            <img src={post.image} className='w-full rounded-md' alt="" />
+          </div>
+          <Comment comment={post.comments[0]}/>
         </div>
       ))}
     </>
