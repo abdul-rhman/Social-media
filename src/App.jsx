@@ -9,6 +9,9 @@ import LogIn from './Components/LogIn/LogIn';
 import Error from './Components/Error/Error';
 import UserContextProvider from './Contexts/UserContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const reactQueyClient = new QueryClient();
 
 const appRouter = createBrowserRouter([
   {path:'',element:<Layout/>,children:[
@@ -23,7 +26,9 @@ const appRouter = createBrowserRouter([
 export default function App() {
   return (
     <UserContextProvider>
-      <RouterProvider router={appRouter}/>
+      <QueryClientProvider client={reactQueyClient}>
+        <RouterProvider router={appRouter}/>
+      </QueryClientProvider>
     </UserContextProvider>
   )
 }
