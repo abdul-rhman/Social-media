@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from './Home.module.css'
-import img from '../../assets/Infographic_CH08_Browser Object Model (BOM).jpg'
 import axios from 'axios';
 import { userContext } from '../../Contexts/UserContext';
 import { useQuery } from '@tanstack/react-query';
