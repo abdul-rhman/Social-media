@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export default function UserPosts(props) {
     let {token} = useContext(userContext);
     let {data, error, isError, isLoading} = useQuery({
-      queryKey: ['postsQuery'],
+      queryKey: [`user${props.userId}Posts`],
       queryFn:_=>  axios.get(`https://linked-posts.routemisr.com/users/${props.userId}/posts`,{
           headers:{
             token

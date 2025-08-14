@@ -5,6 +5,7 @@ import { userContext } from '../../Contexts/UserContext';
 import { useQuery } from '@tanstack/react-query';
 import Comment from './../Comment/Comment';
 import { useNavigate } from 'react-router-dom';
+import AddComment from './../AddComment/AddComment';
 
 export default function Home() {
 
@@ -40,6 +41,7 @@ let {data, error, isError, isLoading} = useQuery({
             <img src={post.image} className='w-full rounded-md' alt="" />
           </div>
           <Comment comment={post.comments[0]}/>
+          <AddComment postId={post.id}/>
         </div>
       ))}
     </>

@@ -5,6 +5,7 @@ import { userContext } from '../../Contexts/UserContext';
 import axios from 'axios';
 import Comment from './../Comment/Comment';
 import { useParams } from 'react-router-dom';
+import AddComment from '../AddComment/AddComment';
 
 export default function SinglePost() {
   
@@ -44,6 +45,8 @@ let {data, error, isError, isLoading} = useQuery({
           <h2 className='mb-4'>{data.body}</h2>
           <img src={data.image} className='w-full rounded-md' alt="" />
           {data.comments.map(comment=><Comment key={comment._id} comment={comment}/>)}
+          
+          <AddComment postId={data.id}/>
         </div>
       }
     </>
