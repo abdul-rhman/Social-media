@@ -7,9 +7,12 @@ import { useNavigate } from 'react-router-dom'
 import  '@fortawesome/fontawesome-free/css/all.css'
 import { useContext, useState } from 'react';
 import { userContext } from './../../Contexts/UserContext';
+import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function AddComment(props) {
 
+  let queryClient = useQueryClient();
   let[isLoading,setIsLoading] = useState(false);
   let {token}=useContext(userContext);
   const schema = z.object({
@@ -31,8 +34,10 @@ export default function AddComment(props) {
       headers:{token}
     }).
       then(response => {
-        console.log(response);
-        reset();
+      toast.success('Comment Added Successfuly');
+      queryClient.invalidateQueries({queryKey: [`SinglPostQuery${props.postId}`]});
+      queryClient.invalidateQueries({queryKey:['postsQuery']});
+      reset();
       }).catch(error=>{
       }).finally(()=>{
       setIsLoading(false);

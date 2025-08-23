@@ -26,7 +26,9 @@ let {data, error, isError, isLoading} = useQuery({
     }),
   select:(data)=>data.data.post
 })
-
+// const response = data.image?axios.get(data.image,{ responseType: "blob",headers:{
+      //   token
+      // } }).then(respnse=>console.log(respnse)):null;
   return (
     <>
       {isLoading?(<div className=" flex h-screen w-full justify-center items-center"><div className='lds-spinner'><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div></div>

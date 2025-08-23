@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import style from './Profile.module.css'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { userContext } from './../../Contexts/UserContext';
 import UserPosts from './../UserPosts/UserPosts';
+import AddPost from './../AddPost/AddPost';
 
 export default function Profile() {
 
@@ -22,6 +23,7 @@ export default function Profile() {
         <p>E-mail: {data?.email}</p>
         <p>BirthDay: {data?.dateOfBirth}</p>
       </div>
+      <AddPost/>
       {data?<UserPosts userId={data?._id}/>:null}
     </>
   )

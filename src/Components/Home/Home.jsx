@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import Comment from './../Comment/Comment';
 import { useNavigate } from 'react-router-dom';
 import AddComment from './../AddComment/AddComment';
+import AddPost from '../AddPost/AddPost';
 
 export default function Home() {
 
@@ -25,7 +26,9 @@ let {data, error, isError, isLoading} = useQuery({
     <>
       {isLoading?(<div className=" flex h-screen w-full justify-center items-center"><div className='lds-spinner'><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div></div>
 ):
-      (data.data.posts.map(post=>
+      <>
+      <AddPost/>
+      {(data.data.posts.map(post=>
         <div key={post.id} className='w-full md:w-[80%] lg:w-[60%] rounded-md bg-slate-100 text-slate-900 mx-auto p-4 mb-5'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center  gap-3'>
@@ -40,10 +43,12 @@ let {data, error, isError, isLoading} = useQuery({
             <h2 className='mb-4'>{post.body}</h2>
             <img src={post.image} className='w-full rounded-md' alt="" />
           </div>
-          <Comment comment={post.comments[0]}/>
+          {post.comments.length>0 &&<Comment comment={post.comments[post.comments.length-1]}/>}
           <AddComment postId={post.id}/>
         </div>
       ))}
+      </>
+      }
     </>
   )
 }

@@ -11,6 +11,8 @@ import UserContextProvider from './Contexts/UserContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SinglePost from './Components/SinglePost/SinglePost';
+import Settings from './Components/Settings/Settings';
+import { Toaster } from 'react-hot-toast';
 
 const reactQueyClient = new QueryClient();
 
@@ -18,6 +20,7 @@ const appRouter = createBrowserRouter([
   {path:'',element:<Layout/>,children:[
     {index:true, element:<ProtectedRoute><Home/></ProtectedRoute>},
     {path:'profile', element:<ProtectedRoute><Profile/></ProtectedRoute>},
+    {path:'settings', element:<ProtectedRoute><Settings/></ProtectedRoute>},
     {path:'login', element:<LogIn/>},
     {path:'signup', element:<SignUp/>},
     {path:'postDetails/:id', element:<ProtectedRoute><SinglePost/></ProtectedRoute>},
@@ -29,6 +32,7 @@ export default function App() {
   return (
     <UserContextProvider>
       <QueryClientProvider client={reactQueyClient}>
+        <Toaster/>
         <RouterProvider router={appRouter}/>
       </QueryClientProvider>
     </UserContextProvider>
