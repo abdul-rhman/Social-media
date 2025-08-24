@@ -1,12 +1,37 @@
-# React + Vite
+# Social Media Project (React + REST API)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a **React-based social media web application** built as part of the **Route Academy Front-End Course**.  
+It connects to the [Route Academy RESTful API](https://documenter.getpostman.com/view/5709532/2sA3JT4Jzs) to provide basic social media features such as user authentication, profile management, and posts.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- User authentication (sign up, login, logout)
+- Profile management (view & update user profile)
+- Display posts and user interactions
+- Error handling with React Query
+- Protected routes
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
+- **React** – Frontend framework
+- **React Router DOM** – Routing & navigation
+- **React Query (TanStack Query)** – Server state management
+- **Axios** – HTTP requests
+- **React Hook Form** – Form handling & validation
+- **TailwindCSS / CSS Modules** – Styling (if you used any)
+- **Postman API** – Backend API testing and reference
 
-## Expanding the ESLint configuration
+## 📚 Learning Outcomes
+- Practiced **frontend integration** with REST APIs  
+- Learned **state & cache management** using React Query  
+- Implemented **form validation** with React Hook Form  
+- Applied **modular component design**  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Installation
+```bash
+# Clone repository
+git clone https://github.com/abdul-rhman/Social-media.git
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
