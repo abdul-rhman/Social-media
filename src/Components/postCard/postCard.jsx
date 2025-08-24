@@ -1,4 +1,4 @@
-import style from './PostCard.module.css'
+import style from './postCard.module.css'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Comment from './../Comment/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
