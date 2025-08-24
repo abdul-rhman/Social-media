@@ -57,7 +57,7 @@ useEffect(() => {
         </Link>
         <div className="flex gap-3">
         {token?(<>
-          <div className="flex items-center relative md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <div className="flex items-center relative md:order-2 md:space-x-0 rtl:space-x-reverse">
           
             <button ref={navDropDownRef} type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={(e) => { setShowNavDropDown((prev) => !prev); e.stopPropagation(); }} >
               <img className="w-8 h-8 rounded-full" src={data?.photo} alt="user photo" />
