@@ -79,7 +79,7 @@ export default function EditPostDialog({post ,closeDialog}) {
         <div className='my-4 bg-slate-100 shadow-sm shadow-sky-100 shadow-blur  w-[80%] md:w-[80%] lg:w-[60%] mx-auto rounded-xl'>
           <form onSubmit={handleSubmit(handleUpdatePost)} className=" p-6 mx-auto">
             <div className="relative z-0 w-full mb-2 group">
-              <textarea type="text" {...register('body')} id="edit-body" className="resize-none block py-2.5 px-0 w-full text-sm text-gray-900 bg-slate-50 rounded-sm border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" What's on your mind? 🤔" />
+              <textarea type="text" {...register('body')} id="edit-body" className="resize-none block py-2.5 px-0 w-full text-sm text-gray-900 bg-slate-50 rounded-sm border-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" What's on your mind? 🤔" />
             </div>
             <div className='mb-4'>
               <img className='max-h-[50vh] w-full object-contain' src={image.path} alt="" />  
