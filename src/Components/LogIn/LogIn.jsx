@@ -7,12 +7,13 @@ import axios  from 'axios';
 import { useNavigate } from 'react-router-dom'
 import  '@fortawesome/fontawesome-free/css/all.css'
 import { userContext } from './../../Contexts/UserContext';
+import { QueryClient, useQueryClient } from '@tanstack/react-query'
 export default function Login() {
 
   let{changeToken}=useContext(userContext)
   let[apiErrorResp,setApiErrorResp] = useState(null);
   let[isLoading,setIsLoading] = useState(false);
-  
+  let queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const schema = z.object({
@@ -33,8 +34,9 @@ export default function Login() {
     setIsLoading(true);
     axios.post('https://linked-posts.routemisr.com/users/signin',data).
     then(response => {
-      changeToken(response.data.token)
-      navigate('/')
+      changeToken(response.data.token);
+      queryClient.invalidateQueries({queryKey:['currentData']});
+      navigate('/');
     }).catch(error=>{
       setApiErrorResp(error.response.data.error)
     }).finally(()=>{

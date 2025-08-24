@@ -27,20 +27,25 @@ export default function AddPost() {
     setImage(e.target.files[0])
   }
   function handleAddPost(data){
-    let formData = new FormData()
-    formData.append('body',data.body);
-    image && formData.append('image',image);
-    axios.post('https://linked-posts.routemisr.com/posts',formData,{headers:{token}}
-    ).
-    then(response => {
-      toast.success('Post added successfuly');
-      queryClient.invalidateQueries({queryKey:[`userPosts`]});
-      reset();
-      setImage(null);
-      inputImage.current.value=null;
-    }).catch(error=>{
-      toast.error('some data are missing');
-    })
+    if(!isLoading){
+      setIsLoading(true);
+      let formData = new FormData()
+      formData.append('body',data.body);
+      image && formData.append('image',image);
+      axios.post('https://linked-posts.routemisr.com/posts',formData,{headers:{token}}
+      ).
+      then(response => {
+        toast.success('Post added successfuly');
+        queryClient.invalidateQueries({queryKey:[`userPosts`]});
+        reset();
+        setImage(null);
+        inputImage.current.value=null;
+      }).catch(error=>{
+        toast.error('some data are missing');
+      }).finally(()=>{
+        setIsLoading(false)
+      })
+    }
   }
 
   return (

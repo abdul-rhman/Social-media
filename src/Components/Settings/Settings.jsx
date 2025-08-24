@@ -40,6 +40,7 @@ export default function Settings() {
       toast.success('password changed successfuly')
     }).catch(error=>{
       toast.error('Can\'t change the password')
+      console.log(error)
     }).finally(()=>{
         setIsChangePasswordLoading(false);
       })

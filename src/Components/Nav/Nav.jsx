@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import style from './Nav.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { userContext } from './../../Contexts/UserContext';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 export default function Nav() {
 
   
   let{token,changeToken,setuserId,id}=useContext(userContext);
-  
+  let queryClient = useQueryClient();
   const navigate = useNavigate();
   
   let {error,isError,data,isLoading} = useQuery({
@@ -19,6 +19,8 @@ export default function Nav() {
   })
   function handleLogout(){
     changeToken(null);
+    setuserId(null);
+    queryClient.removeQueries({ queryKey: ['currentData'] });
     navigate('/login')
   }
 
