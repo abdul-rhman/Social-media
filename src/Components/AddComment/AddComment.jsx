@@ -14,7 +14,7 @@ export default function AddComment(props) {
 
   let queryClient = useQueryClient();
   let[isLoading,setIsLoading] = useState(false);
-  let {token}=useContext(userContext);
+  let{token}=useContext(userContext);
   const schema = z.object({
   content: z.string().regex(/^(?!\s*$).+$/, "Comment cannot be empty or spaces only"),
   post:z.string()
@@ -37,6 +37,7 @@ export default function AddComment(props) {
       toast.success('Comment Added Successfuly');
       queryClient.invalidateQueries({queryKey: [`SinglPostQuery${props.postId}`]});
       queryClient.invalidateQueries({queryKey:['postsQuery']});
+      queryClient.invalidateQueries({queryKey:['userPosts']});
       reset();
       }).catch(error=>{
       }).finally(()=>{

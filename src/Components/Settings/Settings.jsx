@@ -20,7 +20,6 @@ export default function Settings() {
     select:(data)=>data.data.user
   })
 
-  console.log(data)
 
   const changePassForm = useForm({
         defaultValues:{
@@ -39,10 +38,8 @@ export default function Settings() {
       changeToken(response.data.token)
       resetPassForm();
       toast.success('password changed successfuly')
-      console.log(response)
     }).catch(error=>{
       toast.error('Can\'t change the password')
-      console.log(error)
     }).finally(()=>{
         setIsChangePasswordLoading(false);
       })

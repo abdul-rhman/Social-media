@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import style from './Nav.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { userContext } from './../../Contexts/UserContext';
@@ -8,7 +8,7 @@ import axios from 'axios';
 export default function Nav() {
 
   
-  let{token,changeToken}=useContext(userContext);
+  let{token,changeToken,setuserId,id}=useContext(userContext);
   
   const navigate = useNavigate();
   
@@ -17,11 +17,15 @@ export default function Nav() {
     queryFn:()=>axios.get('https://linked-posts.routemisr.com/users/profile-data',{headers:{token}}),
     select:(data)=>data.data.user
   })
-console.log(data);
-    function handleLogout(){
-      changeToken(null);
-      navigate('/login')
-    }
+  function handleLogout(){
+    changeToken(null);
+    navigate('/login')
+  }
+
+  useEffect(()=>{
+    !id&&data&&setuserId(data._id);
+  },[data?._id])
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

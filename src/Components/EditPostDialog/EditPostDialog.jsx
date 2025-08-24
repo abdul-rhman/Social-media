@@ -5,6 +5,7 @@ import { userContext } from '../../Contexts/UserContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
 
 
 export default function EditPostDialog({post ,closeDialog}) {
@@ -15,7 +16,7 @@ export default function EditPostDialog({post ,closeDialog}) {
   let prevImage = useRef({img:"",path:post.image});
   let[image,setImage] = useState({...prevImage.current,path:post.image});
   let inputImage = useRef();
-
+  let{pathname}=useLocation();
   const PostForm = useForm({
     defaultValues:{
       body:post.body,
@@ -24,7 +25,6 @@ export default function EditPostDialog({post ,closeDialog}) {
   });
 
   
-  console.log(image.path)
 
   useEffect(()=>{
     if (post?.image) {
@@ -41,7 +41,6 @@ export default function EditPostDialog({post ,closeDialog}) {
         prevImage.current = {...prevImage.current,img:file};
         setImage(prevImage.current)
       } catch (err) {
-        console.error("Error fetching image:", err);
       }
     };
 
@@ -58,14 +57,15 @@ export default function EditPostDialog({post ,closeDialog}) {
   function handleUpdatePost(data){
     let formData = new FormData()
     formData.append('body',data.body);
-    formData.append('image',image.img);
-    console.log(data.body)
-    console.log(image.img)
+    image.img && formData.append('image',image.img);
     axios.put(`https://linked-posts.routemisr.com/posts/${post._id}`,formData,{headers:{token}}
     ).
     then(response => {
       toast.success('Post updated successfuly');
       queryClient.invalidateQueries({queryKey:[`userPosts`]});
+      if(pathname.includes('postDetails')){
+        queryClient.invalidateQueries({queryKey: [`SinglPostQuery${post._id}`]})
+      }
       closeDialog();
     }).catch(error=>{
       toast.error('some data are missing');
@@ -76,7 +76,7 @@ export default function EditPostDialog({post ,closeDialog}) {
     <div className='fixed w-screen h-screen bg-[rgb(0,0,0,0.6)] z-100 top-0 bottom-0 right-0 left-0'>
 
       <div className='flex justify-center items-center h-full'  onClick={(e)=>{ if (e.target === e.currentTarget) closeDialog();}}>
-        <div className='my-4 bg-slate-100 shadow-md shadow-sky-100 shadow-blur  w-[80%] md:w-[80%] lg:w-[60%] mx-auto rounded-xl'>
+        <div className='my-4 bg-slate-100 shadow-sm shadow-sky-100 shadow-blur  w-[80%] md:w-[80%] lg:w-[60%] mx-auto rounded-xl'>
           <form onSubmit={handleSubmit(handleUpdatePost)} className=" p-6 mx-auto">
             <div className="relative z-0 w-full mb-2 group">
               <textarea type="text" {...register('body')} id="edit-body" className="resize-none block py-2.5 px-0 w-full text-sm text-gray-900 bg-slate-50 rounded-sm border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" What's on your mind? 🤔" />
