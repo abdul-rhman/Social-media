@@ -30,7 +30,7 @@ export default function PostCard({post}) {
     then(response => {
       toast.success('Post deleted successfuly');
       queryClient.invalidateQueries({queryKey:[`userPosts`]});
-      if(pathname.includes('postDetails'));
+      if(pathname.includes('postDetails'))
         navigate('/')
     }).catch(error=>{
       toast.error('Can\'t delete the post ');
@@ -80,7 +80,7 @@ export default function PostCard({post}) {
             </div>
           </div>
           <div className='cursor-pointer' onClick={()=>{navigate(`/postDetails/${post._id}`)}}>
-            <h2 className='mb-4'>{post.body}</h2>
+            <h2 className='mb-4 wrap-break-word'>{post.body}</h2>
             <img src={post.image} className='w-full rounded-md' alt="" />
           </div>
         </div>
